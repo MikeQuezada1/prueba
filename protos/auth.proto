@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package auth;
+
+service  AuthService {
+    rpc Login(LoginRequest) returns (LoginResponse);
+}
+
+message  LoginRequest{
+    string email =1;
+    string hashedPassword=2;
+}
+
+message  LoginResponse{
+    string  token =1;
+}
+
+
+/*
+  protoc \
+  --plugin=protoc-gen-grpc-web=./node_modules/.bin/grpc_tools_node_protoc_plugin \
+  --js_out=import_style=commonjs+dts,binary:./protos \
+  --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:./protos \
+  ./protos/auth.proto
+
+
+protoc \
+  --plugin=protoc-gen-grpc-web=./node_modules/.bin/grpc_tools_node_protoc_plugin \
+  --js_out=import_style=commonjs+dts,binary:./protos \
+  --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:./protos \
+  auth.proto  
+
+  protoc \
+  --plugin=protoc-gen-grpc-web=$(which grpc_tools_node_protoc_plugin) \
+  --js_out=import_style=commonjs+dts,binary:./generated \
+  --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:./generated \
+  auth.proto
+
+   npx grpc_tools_node_protoc \
+  --js_out=import_style=commonjs+dts,binary:./protos  \
+  --grpc_out=grpc_js:${outputDir} \
+  --plugin=protoc-gen-grpc=./node_modules/.bin/grpc_tools_node_protoc_plugin \
+  --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts \
+  --ts_out=grpc_js:${outputDir}  \
+  -I ${protoPath} \
+  ${protoFile} 
+
+  "scripts": {
+    "generate-protobuf": "protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --ts_out=./src \"%cd%/protos/auth.proto\""
+  },
+  
+  "generate-protobuf": "protoc --plugin=protoc-gen-grpc-web=./node_modules/.bin/grpc_node_protoc_plugin --ts_out=import_style=commonjs+dts,binary:%cd%/generated --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:%cd%/generated --proto_path=%cd%/protos --ts_out=import_style=commonjs,binary:%cd%/generated \"%cd%/protos/auth.proto\""
+  */

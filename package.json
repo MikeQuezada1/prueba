@@ -1,0 +1,29 @@
+{
+  "name": "prueba",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "types": [
+    "node",
+    "module"
+  ],
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-protobuf": "protoc --plugin=protoc-gen-grpc-web=./node_modules/.bin/grpc_node_protoc_plugin --ts_out=import_style=commonjs+dts,binary:%cd%/generated --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:%cd%/generated --proto_path=%cd%/protos \"%cd%/protos/auth.proto\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.9.14",
+    "@grpc/proto-loader": "^0.7.10",
+    "grpc-tools": "^1.12.4",
+    "grpc-web": "^1.5.0",
+    "mysql2": "^3.9.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "ts-protoc-gen": "^0.15.0"
+  }
+}
